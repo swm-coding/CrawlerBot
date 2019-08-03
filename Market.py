@@ -10,8 +10,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 with open(os.path.join(BASE_DIR, "startMarket.txt"), "r") as f:
     start = int(f.readline())
-with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write(str(datetime.now()) + " Daangn\n")
+
+#with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+    #f.write(str(datetime.now()) + " Daangn\n")
 
 articles = str(start)
 count = 0
@@ -55,13 +56,12 @@ while 1:
     price = soup.find('p', id='article-price-nanum')
     if price :
         price = '무료나눔'
-        articles = str(int(articles) + 2)
-        continue
     else:
         price = soup.find('p', id='article-price').contents[0]
-        if len(price) <= 6:
-            articles = str(int(articles) + 2)
-            continue
+
+    day = datetime.today().replace(microsecond=0)
+
+    articles = str(int(articles) + 2)
 
     try:
         description = soup.find('div', id='article-detail')
@@ -71,15 +71,9 @@ while 1:
 
     description = description.text
 
-    price = price.strip()
-    day = str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day)
-
-    articles = str(int(articles) + 2)
-    print(title, price, day, URL, 1)
+    print(title, price, day, URL, description)
 
 request.close()
-
-os.remove(os.path.join(BASE_DIR,  "startMarket.txt"))
 
 with open(os.path.join(BASE_DIR, "startMarket.txt"), "w") as f:
     f.write(articles)
