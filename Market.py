@@ -23,7 +23,6 @@ count = 0
 end = 0
 
 while 1:
-    print("Start",articles)
     URL = 'https://www.daangn.com/articles/'
     URL = URL + articles
 
@@ -95,22 +94,16 @@ while 1:
         "id":id
     }
 
-    #print(title, price, day, URL, description, id)
-
+    print(title, price, day, URL, description, id)
     result = process.process(post)
 
-    # print("process END!")
-
     if tester.isLaptopPost(title) and result["count"] > 0:
-        print(title, price, day, URL, description, id)
+
 
         client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
         coll = client.test.laptop
         coll.insert(result["data"])
         print("Laptop Post Found!")
-
-    print("DB END!")
-
 
 request.close()
 

@@ -14,8 +14,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(BASE_DIR, "startMarket2.txt"), "r") as f:
     start = int(f.readline())
 
-#with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    #f.write(str(datetime.now()) + " Daangn\n")
+# with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+# f.write(str(datetime.now()) + " Daangn\n")
 
 articles = str(start)
 count = 0
@@ -23,7 +23,6 @@ count = 0
 end = 0
 
 while 1:
-    print("Start",articles)
     URL = 'https://www.daangn.com/articles/'
     URL = URL + articles
 
@@ -41,7 +40,7 @@ while 1:
         continue
 
     repoCheck = soup.find('p', id='no-article')
-    if repoCheck :
+    if repoCheck:
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
@@ -71,7 +70,6 @@ while 1:
         price = soup.find('p', id='article-price').contents[0]
         price = price.replace(" ", '').replace("\n", "")
 
-
     day = datetime.today().replace(microsecond=0)
 
     articles = str(int(articles) + 2)
@@ -87,30 +85,22 @@ while 1:
     # print("Crawling END!")
 
     post = {
-        "title":title,
-        "price":price,
-        "url":URL,
-        "time":day,
-        "text":description,
-        "id":id
+        "title": title,
+        "price": price,
+        "url": URL,
+        "time": day,
+        "text": description,
+        "id": id
     }
 
-    #print(title, price, day, URL, description, id)
-
+    print(title, price, day, URL, description, id)
     result = process.process(post)
 
-    # print("process END!")
-
     if tester.isLaptopPost(title) and result["count"] > 0:
-        print(title, price, day, URL, description, id)
-
         client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
         coll = client.test.laptop
         coll.insert(result["data"])
         print("Laptop Post Found!")
-
-    print("DB END!")
-
 
 request.close()
 
