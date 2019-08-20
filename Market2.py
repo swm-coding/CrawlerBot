@@ -1,6 +1,9 @@
 # 당근마켓
 from bs4 import BeautifulSoup
 from datetime import datetime
+import process
+from pymongo import MongoClient
+import tester
 import requests
 import os
 
@@ -10,8 +13,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 with open(os.path.join(BASE_DIR, "startMarket2.txt"), "r") as f:
     start = int(f.readline())
+
 #with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    #f.write(str(datetime.now()) +" Daangn2\n")
+    #f.write(str(datetime.now()) + " Daangn\n")
 
 articles = str(start)
 count = 0
@@ -19,6 +23,7 @@ count = 0
 end = 0
 
 while 1:
+    print("Start",articles)
     URL = 'https://www.daangn.com/articles/'
     URL = URL + articles
 
@@ -30,7 +35,7 @@ while 1:
     if Check:
         count += 1
         articles = str(int(articles) + 2)
-        if count >= 5:
+        if count >= 10:
             articles = str(int(articles) - 10)
             break
         continue
@@ -39,7 +44,7 @@ while 1:
     if repoCheck :
         count += 1
         articles = str(int(articles) + 2)
-        if count >= 5:
+        if count >= 10:
             articles = str(int(articles) - 10)
             break
         continue
@@ -52,11 +57,20 @@ while 1:
         articles = str(int(articles) + 2)
         continue
 
-    price = soup.find('p', id='article-price-nanum')
-    if price:
-        price = '무료나눔'
+    id = soup.find('div', id='nickname').contents[0]
+
+    try:
+        price = soup.find('p', id='article-price').contents[0]
+    except Exception:
+        price = '0원'
+
+    if len(price) < 6:
+        price = '0원'
+
     else:
         price = soup.find('p', id='article-price').contents[0]
+        price = price.replace(" ", '').replace("\n", "")
+
 
     day = datetime.today().replace(microsecond=0)
 
@@ -70,9 +84,35 @@ while 1:
 
     description = description.text
 
-    print(title, price, day, URL, description)
+    # print("Crawling END!")
+
+    post = {
+        "title":title,
+        "price":price,
+        "url":URL,
+        "time":day,
+        "text":description,
+        "id":id
+    }
+
+    #print(title, price, day, URL, description, id)
+
+    result = process.process(post)
+
+    # print("process END!")
+
+    if tester.isLaptopPost(title) and result["count"] > 0:
+        print(title, price, day, URL, description, id)
+
+        client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+        coll = client.test.laptop
+        coll.insert(result["data"])
+        print("Laptop Post Found!")
+
+    print("DB END!")
+
 
 request.close()
 
-with open(os.path.join(BASE_DIR, "startMarket.txt"), "w") as f:
+with open(os.path.join(BASE_DIR, "startMarket2.txt"), "w") as f:
     f.write(articles)
