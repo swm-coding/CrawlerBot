@@ -83,8 +83,6 @@ while 1:
 
     description = description.text
 
-    # print("Crawling END!")
-
     post = {
         "title":title,
         "price":price,
@@ -94,7 +92,7 @@ while 1:
         "id":id
     }
 
-    print(title, price, day, URL, description, id)
+    print(title, price, day, URL, description)
     result = process.process(post)
 
     if tester.isLaptopPost(title) and result["count"] > 0:
