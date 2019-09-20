@@ -36,6 +36,8 @@ while 1:
 
     URL = 'https://m.joongna.com/product-detail/'
     URL = URL + articles
+    print(URL)
+
     try:
         driver.get(URL)
     except Exception:
@@ -45,8 +47,6 @@ while 1:
             articles = str(int(articles) - 40)
             break
         continue
-
-    print(URL)
 
     request = requests.get(URL)
     html = driver.page_source
@@ -81,9 +81,6 @@ while 1:
 
     articles = str(int(articles) + 4)
     count = 0
-
-driver.close()
-
 
 os.remove(os.path.join(BASE_DIR,  "startJoongo4.txt"))
 

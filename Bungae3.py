@@ -97,8 +97,6 @@ while 1:
     articles = str(int(articles) + 4)
     count = 0
 
-driver.close()
-
 os.remove(os.path.join(BASE_DIR,  "startBungae3.txt"))
 
 with open(os.path.join(BASE_DIR, "startBungae3.txt"), "w") as f:
