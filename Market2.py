@@ -21,7 +21,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Market2.py " + str(datetime.now()) + articles)
+    f.write("Market2.py " + str(datetime.now()) + " " + articles)
 
 while 1:
     URL = 'https://www.daangn.com/articles/'

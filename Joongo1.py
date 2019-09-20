@@ -25,7 +25,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("startJoongo1.py " + str(datetime.now()) + articles)
+    f.write("startJoongo1.py " + str(datetime.now()) + " " + articles)
 
 path=BASE_DIR + "/chromedriver"
 print(path)
@@ -58,7 +58,11 @@ while 1:
         title = data.find('div', class_='data').find('p').contents[0]
         price = data.find('div', class_='data').find('em').contents[0]
         day = str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day)
-        description = data.find('article', class_='detail_atc bg_white').find('p', class_='description mt20').find('span').contents[0]
+
+        try:
+            description = data.find('article', class_='detail_atc bg_white').find('p', class_='description mt20').find('span').contents[0]
+        except Exception:
+            description = ""
 
     print(title, price, day, URL, description)
 

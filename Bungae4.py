@@ -24,7 +24,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Bungae4.py " + str(datetime.now()) + articles)
+    f.write("Bungae4.py " + str(datetime.now()) + " " + articles)
 
 path=BASE_DIR + "/chromedriver"
 print(path)
