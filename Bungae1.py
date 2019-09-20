@@ -26,7 +26,7 @@ end = 0
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
     f.write("Bungae1.py " + str(datetime.now()) + " " + articles + "\n")
 
-path=BASE_DIR + "/chromedriver"
+path=BASE_DIR + "/chromedriver_linux"
 print(path)
 
 driver = webdriver.Chrome(options=options, executable_path=path)
