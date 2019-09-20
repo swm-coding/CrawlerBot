@@ -40,6 +40,10 @@ while 1:
         driver.get(URL)
     except Exception:
         articles = str(int(articles) + 4)
+        count += 1
+        if count >= 10:
+            articles = str(int(articles) - 40)
+            break
         continue
 
     print(URL)
@@ -54,7 +58,7 @@ while 1:
         count += 1
         articles = str(int(articles) + 4)
         if count >= 10:
-            articles = str(int(articles) - 36)
+            articles = str(int(articles) - 40)
             break
         print('Not Products')
         continue

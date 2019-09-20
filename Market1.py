@@ -36,7 +36,7 @@ while 1:
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
-            articles = str(int(articles) - 18)
+            articles = str(int(articles) - 20)
             break
         continue
 
@@ -45,7 +45,7 @@ while 1:
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
-            articles = str(int(articles) - 18)
+            articles = str(int(articles) - 20)
             break
         continue
 
