@@ -24,7 +24,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Bungae4.py " + str(datetime.now()) + " " + articles)
+    f.write("Bungae4.py " + str(datetime.now()) + " " + articles + "\n")
 
 path=BASE_DIR + "/chromedriver"
 print(path)
@@ -60,8 +60,6 @@ while 1:
             break
         continue
 
-    count = 0
-
     try :
         title = (soup.find('div', class_='product-summary__title').find('h2')).contents[0]
     except Exception:
@@ -89,6 +87,7 @@ while 1:
     """
 
     articles = str(int(articles) + 4)
+    count = 0
 
 driver.close()
 

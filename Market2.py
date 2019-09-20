@@ -21,7 +21,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Market2.py " + str(datetime.now()) + " " + articles)
+    f.write("Market2.py " + str(datetime.now()) + " " + articles + "\n")
 
 while 1:
     URL = 'https://www.daangn.com/articles/'
@@ -73,8 +73,6 @@ while 1:
 
     day = datetime.today().replace(microsecond=0)
 
-    articles = str(int(articles) + 2)
-
     try:
         description = soup.find('div', id='article-detail')
     except Exception:
@@ -83,7 +81,10 @@ while 1:
 
     description = description.text
 
-    print(title, price, day, URL, description, id)
+    print(title, price, day, URL, description)
+
+    articles = str(int(articles) + 2)
+    count = 0
 
     """
     데이터 분석 및 몽고디비 연결

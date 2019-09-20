@@ -25,7 +25,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("startJoongo1.py " + str(datetime.now()) + " " + articles)
+    f.write("startJoongo1.py " + str(datetime.now()) + " " + articles + "\n")
 
 path=BASE_DIR + "/chromedriver"
 print(path)
@@ -33,9 +33,14 @@ print(path)
 driver = webdriver.Chrome(options=options, executable_path=path)
 
 while 1:
+
     URL = 'https://m.joongna.com/product-detail/'
     URL = URL + articles
-    driver.get(URL)
+    try:
+        driver.get(URL)
+    except Exception:
+        articles = str(int(articles) + 4)
+        continue
 
     print(URL)
 
@@ -67,11 +72,12 @@ while 1:
     print(title, price, day, URL, description)
 
     articles = str(int(articles) + 4)
+    count = 0
 
 driver.close()
 
 
-os.remove(os.path.join(BASE_DIR,  "startBungae1.txt"))
+os.remove(os.path.join(BASE_DIR,  "startJoongo1.txt"))
 
-with open(os.path.join(BASE_DIR, "startBungae1.txt"), "w") as f:
+with open(os.path.join(BASE_DIR, "startJoongo1.txt"), "w") as f:
     f.write(articles)
