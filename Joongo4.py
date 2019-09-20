@@ -25,7 +25,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("startJoongo4.py " + str(datetime.now()) + " " + articles + "\n")
+    f.write("Joongo4.py " + str(datetime.now()) + " " + articles + "\n")
 
 path=BASE_DIR + "/chromedriver_mac"
 print(path)
@@ -74,6 +74,10 @@ while 1:
             description = ""
 
     print(title, price, day, URL, description)
+
+    """
+    데이터 분석 및 몽고디비 연결
+    """
 
     articles = str(int(articles) + 4)
     count = 0

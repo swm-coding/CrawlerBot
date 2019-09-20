@@ -42,7 +42,6 @@ while 1:
     except Exception:
         articles = str(int(articles) + 4)
         count += 1
-        count += 1
         if count >= 10:
             articles = str(int(articles) - 40)
             break
@@ -52,7 +51,6 @@ while 1:
         html = driver.page_source
     except Exception:
         articles = str(int(articles) + 4)
-        count += 1
         count += 1
         if count >= 10:
             articles = str(int(articles) - 40)
