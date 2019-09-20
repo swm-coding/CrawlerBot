@@ -1,4 +1,5 @@
 # 번개장터
+# https://m.bunjang.co.kr/
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -9,7 +10,7 @@ start = 0
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-with open(os.path.join(BASE_DIR, "startBungae.txt"), "r") as f:
+with open(os.path.join(BASE_DIR, "startBungae1.txt"), "r") as f:
     start = int(f.readline())
 
 options = webdriver.ChromeOptions()
@@ -22,11 +23,13 @@ articles = str(start)
 count = 0
 end = 0
 
+with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+    f.write("Bungae1.py " + str(datetime.now()) + articles)
+
 path=BASE_DIR + "/chromedriver"
 print(path)
 
 driver = webdriver.Chrome(options=options, executable_path=path)
-
 
 while 1:
     URL = 'https://m.bunjang.co.kr/products/'
@@ -52,8 +55,8 @@ while 1:
     if repoCheck:
         count += 1
         articles = str(int(articles) + 4)
-        if count >= 5:
-            articles = str(int(articles) - 20)
+        if count >= 10:
+            articles = str(int(articles) - 36)
             break
         continue
 
@@ -81,13 +84,15 @@ while 1:
 
     print(title, price, day, URL, description)
 
-
+    """
+    데이터 분석 및 몽고디비 연결
+    """
 
     articles = str(int(articles) + 4)
 
 driver.close()
 
-os.remove(os.path.join(BASE_DIR,  "startBungae.txt"))
+os.remove(os.path.join(BASE_DIR,  "startBungae1.txt"))
 
-with open(os.path.join(BASE_DIR, "startBungae.txt"), "w") as f:
+with open(os.path.join(BASE_DIR, "startBungae1.txt"), "w") as f:
     f.write(articles)

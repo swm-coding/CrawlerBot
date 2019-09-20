@@ -1,4 +1,5 @@
 # 당근마켓
+# https://www.daangn.com/
 from bs4 import BeautifulSoup
 from datetime import datetime
 import process
@@ -11,16 +12,16 @@ start = 0
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-with open(os.path.join(BASE_DIR, "startMarket.txt"), "r") as f:
+with open(os.path.join(BASE_DIR, "startMarket1.txt"), "r") as f:
     start = int(f.readline())
-
-#with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    #f.write(str(datetime.now()) + " Daangn\n")
 
 articles = str(start)
 count = 0
 
 end = 0
+
+with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+    f.write("Market1.py " + str(datetime.now()) + articles)
 
 while 1:
     URL = 'https://www.daangn.com/articles/'
@@ -35,7 +36,7 @@ while 1:
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
-            articles = str(int(articles) - 10)
+            articles = str(int(articles) - 18)
             break
         continue
 
@@ -44,7 +45,7 @@ while 1:
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
-            articles = str(int(articles) - 10)
+            articles = str(int(articles) - 18)
             break
         continue
 
@@ -83,27 +84,29 @@ while 1:
 
     description = description.text
 
+    print(title, price, day, URL, description)
+
+    """
+    데이터 분석 및 몽고디비 연결
     post = {
-        "title":title,
-        "price":price,
-        "url":URL,
-        "time":day,
-        "text":description,
-        "id":id
+        "title": title,
+        "price": price,
+        "url": URL,
+        "time": day,
+        "text": description,
+        "id": id
     }
 
-    print(title, price, day, URL, description)
     result = process.process(post)
 
     if tester.isLaptopPost(title) and result["count"] > 0:
-
-
         client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
         coll = client.test.laptop
         coll.insert(result["data"])
         print("Laptop Post Found!")
+    """
 
 request.close()
 
-with open(os.path.join(BASE_DIR, "startMarket.txt"), "w") as f:
+with open(os.path.join(BASE_DIR, "startMarket1.txt"), "w") as f:
     f.write(articles)
