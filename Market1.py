@@ -1,5 +1,3 @@
-# 당근마켓
-# https://www.daangn.com/
 from bs4 import BeautifulSoup
 from datetime import datetime
 import process
@@ -26,6 +24,7 @@ with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
 while 1:
     URL = 'https://www.daangn.com/articles/'
     URL = URL + articles
+    print(URL)
 
     request = requests.get(URL)
     html = request.text
@@ -86,6 +85,9 @@ while 1:
 
     """
     데이터 분석 및 몽고디비 연결
+    """
+    """
+    수정해야함
     post = {
         "title": title,
         "price": price,
