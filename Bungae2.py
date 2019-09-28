@@ -24,6 +24,14 @@ while 1:
     request = requests.get(URL)
     html = request.json()
 
+    if html["result"] == "fail":
+        count += 1
+        articles = str(int(articles) + 2)
+        if count >= 10:
+            articles = str(int(articles) - 20)
+            break
+        continue
+
     if html['item_info'] == None:
         print('None')
         count += 1
