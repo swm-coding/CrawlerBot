@@ -14,7 +14,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Joongo1.py " + str(datetime.now()) + " " + articles + "\n")
+    f.write("Start Joongo1.py " + str(datetime.now()) + " " + articles + "\n")
 
 while 1:
     URL = 'https://api.joongna.com/product/'
@@ -56,3 +56,7 @@ request.close()
 
 with open(os.path.join(BASE_DIR, "startJoongo1.txt"), "w") as f:
     f.write(articles)
+
+
+with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+    f.write("End Joongo1.py " + str(datetime.now()) + " " + articles + "\n")

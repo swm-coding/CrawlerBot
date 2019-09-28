@@ -19,7 +19,7 @@ count = 0
 end = 0
 
 with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Market1.py " + str(datetime.now()) + " " + articles + "\n")
+    f.write("Start Market1.py " + str(datetime.now()) + " " + articles + "\n")
 
 while 1:
     URL = 'https://www.daangn.com/articles/'
@@ -110,3 +110,7 @@ request.close()
 
 with open(os.path.join(BASE_DIR, "startMarket1.txt"), "w") as f:
     f.write(articles)
+
+
+with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+    f.write("End Market1.py " + str(datetime.now()) + " " + articles + "\n")
