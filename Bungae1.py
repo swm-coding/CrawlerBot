@@ -63,7 +63,7 @@ while 1:
 
     articles = str(int(articles) + 2)
     count = 0
-    break
+
 request.close()
 
 with open(os.path.join(BASE_DIR, "startBungae1.txt"), "w") as f:
