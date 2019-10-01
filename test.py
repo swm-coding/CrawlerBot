@@ -1,22 +1,17 @@
 import requests
 from datetime import datetime
 import os
+import DataCheck
 
-start = 0
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+test = [
+    "17092777", "16917320", "16993839", # 냉장고
+    "17093452", "17093425", # 아이폰
+    "17093483", "17093424", # 갤럭시
+    "17092990", "17016755", # LG
+    "16526482", "16295337", "15791538", "17085434", # TV
+]
 
-with open(os.path.join(BASE_DIR, "startJoongo1.txt"), "r") as f:
-    start = int(f.readline())
-
-articles = str(start)
-count = 0
-
-end = 0
-
-with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("Start Joongo1.py " + str(datetime.now()) + " " + articles + "\n")
-
-while 1:
+for articles in test:
     URL = 'https://api.joongna.com/product/'
     URL = URL + articles
     print(URL)
@@ -45,9 +40,6 @@ while 1:
         continue
 
     print(title, price, day, URL, description)
-    """
-    데이터 분석 및 몽고디비 연결
-    """
     try:
         DataCheck.DataCheck(title, price, URL, day, description)
     except Exception:
@@ -58,10 +50,3 @@ while 1:
     count = 0
 
 request.close()
-
-with open(os.path.join(BASE_DIR, "startJoongo1.txt"), "w") as f:
-    f.write(articles)
-
-
-with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
-    f.write("End Joongo1.py " + str(datetime.now()) + " " + articles + "\n")

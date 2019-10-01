@@ -79,32 +79,14 @@ while 1:
     description = description.text
 
     print(title, price, day, URL, description)
+    try:
+        DataCheck.DataCheck(title, price, URL, day, description)
+    except Exception:
+        with open(os.path.join(BASE_DIR, "Error.txt"), "a+") as f:
+            f.write("Error URL : " + URL)
 
     articles = str(int(articles) + 2)
     count = 0
-
-    """
-    데이터 분석 및 몽고디비 연결
-    """
-    """
-    수정해야함
-    post = {
-        "title": title,
-        "price": price,
-        "url": URL,
-        "time": day,
-        "text": description,
-        "id": id
-    }
-
-    result = process.process(post)
-
-    if tester.isLaptopPost(title) and result["count"] > 0:
-        client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-        coll = client.test.laptop
-        coll.insert(result["data"])
-        print("Laptop Post Found!")
-    """
 
 request.close()
 
