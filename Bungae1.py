@@ -59,7 +59,7 @@ while 1:
     if int(price) < 10000:
         articles = str(int(articles) + 2)
         continue
-        
+
     print(title, price, day, URL, description)
     try:
         DataCheck.DataCheck(title, price, URL, day, description)

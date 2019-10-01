@@ -1,0 +1,12 @@
+cat startBungae1.txt
+echo ""
+cat startBungae2.txt
+echo ""
+cat startJoongo1.txt
+echo ""
+cat startJoongo2.txt
+echo ""
+cat startMarket1.txt
+echo ""
+cat startMarket2.txt
+echo ""
