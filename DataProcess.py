@@ -224,7 +224,7 @@ def Laptop(title, price, URL, time, text):
 
 def Refrigerator(title, price, URL, time, text):
 
-    company = _getCompany(text)
+    company = _getCompany(title)
     size = _getRefgrigeratorSize(text)
     f2f = _getf2f(text)
 
@@ -245,7 +245,7 @@ def Refrigerator(title, price, URL, time, text):
 
 def SmartPhone(title, price, URL, time, text):
 
-    company = _getCompany(text)
+    company = _getCompany(title)
     f2f = _getf2f(text)
 
     data = {
@@ -264,7 +264,7 @@ def SmartPhone(title, price, URL, time, text):
 
 def TV(title, price, URL, time, text):
 
-    company = _getCompany(text)
+    company = _getCompany(title)
     display = _getDisplay(text)
     displayTech = _getDisplayTech(text)
     f2f = _getf2f(text)
@@ -287,7 +287,7 @@ def TV(title, price, URL, time, text):
 
 def Washer(title, price, URL, time, text):
 
-    company = _getCompany(text)
+    company = _getCompany(title)
     f2f = _getf2f(text)
 
     data = {
