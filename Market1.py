@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
-from pymongo import MongoClient
-import DataCheck
 import requests
 import os
+import DataCheck
 
 start = 0
 
