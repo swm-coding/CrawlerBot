@@ -57,10 +57,12 @@ while 1:
     try:
         price = soup.find('p', id='article-price').contents[0]
     except Exception:
-        price = '0원'
+        articles = str(int(articles) + 2)
+        continue
 
-    if len(price) < 6:
-        price = '0원'
+    if len(price) <= 6:
+        articles = str(int(articles) + 2)
+        continue
 
     else:
         price = soup.find('p', id='article-price').contents[0]
@@ -75,11 +77,16 @@ while 1:
         continue
 
     description = description.text
+    price = price.replace(',', '')
+    price = price[:-1]
+
+    if len(price) <= 4:
+        articles = str(int(articles) + 2)
+        continue
 
     print(title, price, day, URL, description)
-
     try:
-        DataCheck.DataCheck(title, price, URL, day, description)
+        DataCheck.DataCheck(title, str(price), URL, day, description, 3)
     except Exception:
         with open(os.path.join(BASE_DIR, "Error.txt"), "a+") as f:
             f.write("Error URL : " + URL + "\n")

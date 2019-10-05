@@ -1,6 +1,6 @@
 import DataProcess
 
-def DataCheck(title, price, URL, time, text):
+def DataCheck(title, price, URL, time, text, site):
 
     LaptopDeclares = ["노트북","맥북","MACBOOK","넷북","탭북","그램"]
     SmartPhoneDeclares = ["아이폰", "갤럭시", "갤럭시 노트", "갤럭시노트",
@@ -16,27 +16,27 @@ def DataCheck(title, price, URL, time, text):
 
     for Declare in LaptopDeclares:
         if Declare in title:
-            DataProcess.Laptop(title, price, URL, time, text)
+            DataProcess.Laptop(title, price, URL, time, text, site)
             return
 
     for Declare in SmartPhoneDeclares:
         if Declare in title:
-            DataProcess.SmartPhone(title, price, URL, time, text)
+            DataProcess.SmartPhone(title, price, URL, time, text, site)
             return
 
     for Declare in RefrigeratorDeclares:
         if Declare in title:
-            DataProcess.Refrigerator(title, price, URL, time, text)
+            DataProcess.Refrigerator(title, price, URL, time, text, site)
             return
 
     for Declare in TVDeclares:
         if Declare in title:
-            DataProcess.TV(title, price, URL, time, text)
+            DataProcess.TV(title, price, URL, time, text, site)
             return
 
     for Declare in WasherDeclares:
         if Declare in title:
-            DataProcess.Washer(title, price, URL, time, text)
+            DataProcess.Washer(title, price, URL, time, text, site)
             return
 
     return False

@@ -64,7 +64,7 @@ while 1:
 
     print(title, price, day, URL, description)
     try:
-        DataCheck.DataCheck(title, price, URL, day, description)
+        DataCheck.DataCheck(title, str(price), URL, day, description, 2)
     except Exception:
         with open(os.path.join(BASE_DIR, "Error.txt"), "a+") as f:
             f.write("Error URL : " + URL + "\n")

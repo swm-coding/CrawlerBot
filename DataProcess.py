@@ -188,6 +188,10 @@ def _getRefgrigeratorSize(text):
     # TODO: 냉장고 용량 데이터 처리 '리터' 'L' 구분,
     return ''
 
+def _getWasherSize(text):
+    # TODO: 냉장고 용량 데이터 처리 '리터' 'L' 구분,
+    return ''
+
 
 def _getf2f(text):
     if "직거래" in text:
@@ -195,7 +199,7 @@ def _getf2f(text):
 
     return 0
 
-def Laptop(title, price, URL, time, text):
+def Laptop(title, price, URL, time, text, site):
 
     company = _getCompany(title)
     f2f = _getf2f(text)
@@ -222,7 +226,7 @@ def Laptop(title, price, URL, time, text):
     coll = client.test.laptop
     coll.insert(data)
 
-def Refrigerator(title, price, URL, time, text):
+def Refrigerator(title, price, URL, time, text, site):
 
     company = _getCompany(title)
     size = _getRefgrigeratorSize(text)
@@ -243,7 +247,7 @@ def Refrigerator(title, price, URL, time, text):
     coll = client.test.refrigerator
     coll.insert(data)
 
-def SmartPhone(title, price, URL, time, text):
+def SmartPhone(title, price, URL, time, text, site):
 
     company = _getCompany(title)
     f2f = _getf2f(text)
@@ -262,7 +266,7 @@ def SmartPhone(title, price, URL, time, text):
     coll = client.test.smartphone
     coll.insert(data)
 
-def TV(title, price, URL, time, text):
+def TV(title, price, URL, time, text, site):
 
     company = _getCompany(title)
     display = _getDisplay(text)
@@ -285,15 +289,17 @@ def TV(title, price, URL, time, text):
     coll = client.test.tv
     coll.insert(data)
 
-def Washer(title, price, URL, time, text):
+def Washer(title, price, URL, time, text, site):
 
     company = _getCompany(title)
+    size = _getWasherSize(text)
     f2f = _getf2f(text)
 
     data = {
         "title": title,
         "price": price,
         "company": company,
+        "size": size,
         "time": time,
         "url": URL,
         "text": text,

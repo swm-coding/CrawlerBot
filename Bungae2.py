@@ -66,7 +66,7 @@ while 1:
     데이터 분석 및 몽고디비 연결
     """
     try:
-        DataCheck.DataCheck(title, price, URL, day, description)
+        DataCheck.DataCheck(title, str(price), URL, day, description, 2)
     except Exception:
         with open(os.path.join(BASE_DIR, "Error.txt"), "a+") as f:
             f.write("Error URL : " + URL + "\n")
