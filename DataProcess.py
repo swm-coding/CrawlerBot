@@ -219,7 +219,8 @@ def Laptop(title, price, URL, time, text, site):
         "time" : time,
         "url" : URL,
         "text" : text,
-        "f2f": f2f
+        "f2f": f2f,
+        "site": site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
@@ -240,7 +241,8 @@ def Refrigerator(title, price, URL, time, text, site):
         "time": time,
         "url": URL,
         "text": text,
-        "f2f": f2f
+        "f2f": f2f,
+        "site" : site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
@@ -259,7 +261,8 @@ def SmartPhone(title, price, URL, time, text, site):
         "time": time,
         "url": URL,
         "text": text,
-        "f2f": f2f
+        "f2f": f2f,
+        "site": site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
@@ -282,7 +285,8 @@ def TV(title, price, URL, time, text, site):
         "time": time,
         "url": URL,
         "text": text,
-        "f2f": f2f
+        "f2f": f2f,
+        "site": site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
@@ -303,7 +307,8 @@ def Washer(title, price, URL, time, text, site):
         "time": time,
         "url": URL,
         "text": text,
-        "f2f": f2f
+        "f2f": f2f,
+        "site": site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
