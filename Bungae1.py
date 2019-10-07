@@ -7,6 +7,8 @@ import DataCheck
 start = 0
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+title = str(datetime.today().year) + '-' + str(datetime.today().month) + '-' + str(datetime.today().day) + '.txt'
+
 with open(os.path.join(BASE_DIR, "startBungae1.txt"), "r") as f:
     start = int(f.readline())
 
@@ -15,7 +17,7 @@ count = 0
 
 end = 0
 
-with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+with open(os.path.join(BASE_DIR + "/logs", title), "a+") as f:
     f.write("Start Bungae1.py " + str(datetime.now()) + " " + articles + "\n")
 
 while 1:
@@ -77,5 +79,5 @@ request.close()
 with open(os.path.join(BASE_DIR, "startBungae1.txt"), "w") as f:
     f.write(articles)
 
-with open(os.path.join(BASE_DIR, "log.txt"), "a+") as f:
+with open(os.path.join(BASE_DIR + "/logs", title), "a+") as f:
     f.write("End Bungae1.py " + str(datetime.now()) + " " + articles + "\n")
