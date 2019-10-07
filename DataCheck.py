@@ -3,13 +3,17 @@ import DataProcess
 def DataCheck(title, price, URL, time, text, site):
 
     LaptopDeclares = ["노트북","맥북","MACBOOK","넷북","탭북","그램"]
-    SmartPhoneDeclares = ["아이폰", "갤럭시", "갤럭시 노트", "갤럭시노트",
-                  "LG V50", "LG V40", "LG V35", "LG V30",
-                  "LG G8", "LG G7"]
+    SmartPhoneDeclares = [
+        "아이폰", "갤럭시", "갤럭시 노트", "갤럭시노트",
+        "LG V50", "LG V40", "LG V35", "LG V30",
+        "LG G8", "LG G7"
+    ]
     RefrigeratorDeclares = ["냉장고"]
     TVDeclares = ["TV", "텔레비젼", "텔레비전"]
     WasherDeclares = ["세탁기", "통돌이"]
-
+    HeadPhoneDeclares = ["이어폰", "헤드셋", "헤드폰", "에어팟", "갤럭시버즈", "차이팟"]
+    GameMachineDeclares = ["닌텐도", "PSP", "PS4", "플스4", "플레이스테이션", "XBOX"]
+    DeskTopDeclares = ["데스크탑", "PC", "게이밍PC", "컴퓨터 본체", "컴퓨터본체", "본체"]
 
     title = title.upper()
     text = text.upper()
@@ -37,6 +41,21 @@ def DataCheck(title, price, URL, time, text, site):
     for Declare in WasherDeclares:
         if Declare in title:
             DataProcess.Washer(title, price, URL, time, text, site)
+            return
+
+    for Declare in HeadPhoneDeclares:
+        if Declare in title:
+            DataProcess.HeadPhone(title, price, URL, time, text, site)
+            return
+
+    for Declare in GameMachineDeclares:
+        if Declare in title:
+            DataProcess.GameMachine(title, price, URL, time, text, site)
+            return
+
+    for Declare in DeskTopDeclares:
+        if Declare in title:
+            DataProcess.DestkTop(title, price, URL, time, text, site)
             return
 
     return False

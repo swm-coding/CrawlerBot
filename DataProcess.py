@@ -7,11 +7,22 @@ def _getCompany(text):
         ['삼성', 'SAMSUNG'],
         ['LG', '엘지', '엘쥐'],
         ['ASUS', '에이수스'],
-        ['APPLE', '맥', '애플', '아이맥'],
+        ['APPLE', '맥', '애플', '아이맥', '에어팟', '아이패드', '아이팟'],
         ['한성'],
         ['HP'],
         ['LENOVO', '레노버', '레노보'],
-        ['롯데']
+        ['롯데', '하이마트'],
+        ['소니', 'SONY'],
+        ['제닉스'],
+        ['QCY'],
+        ['JBL'],
+        ['ABKO', '앱코'],
+        ['MSI'],
+        ['Britz'],
+        ['웨이코스'],
+        ['맥스틸'],
+        ['MAXTILL'],
+        ['RAZER'],
     ]
 
     for companyNames in companyList:
@@ -31,6 +42,32 @@ def _getCpu(text):
 
     if "I7" in text:
         return 'Intel i7'
+
+    if "라이젠3" or "라이젠 3" in text:
+        return "Ryzen 3"
+    if "라이젠5" or "라이젠 5" in text:
+        return "Ryzen 5"
+    if "라이젠7" or "라이젠 7" in text:
+        return "Ryzen 7"
+
+
+def _getGpu(text):
+    if not "GTX" or "GT" in text:
+        return ''
+
+    GPU = [
+        "705", "710", "720", "730", "740", "745", "750", "750TI", "760", "770", "780", "780TI",
+        "950", "960", "970", "980", "980TI",
+        "1050", "1060", "1070", "1080", "1080TI",
+        "1650", "1660", "1660TI",
+        "2060", "2070", "2080", "2080TI",
+        "GTX TITAN X", "TITAN V", "TITAN RTX"
+    ]
+
+    for i in GPU:
+        if i in text:
+            return i
+    return ''
 
 
 def _getRam(text):
@@ -72,7 +109,7 @@ def _getRam(text):
 def _getSsd(text):
     # TODO: discuss whether to seperate ssd hdd
     text = "\n" + text + "\n"
-    ssdDeclares = ['스스디', 'SSD', '하드']
+    ssdDeclares = ['스스디', 'SSD']
     candidate = []
 
     for Declare in ssdDeclares:
@@ -99,6 +136,39 @@ def _getSsd(text):
         if val <= 0:
             return -1
         return -bin(val).count("1") * 10 - abs(math.log2(val) - 7.5)
+
+    return sorted(candidate, key=ssdSort, reverse=True)[0]
+
+def _getHdd(text):
+    # TODO: discuss whether to seperate ssd hdd
+    text = "\n" + text + "\n"
+    ssdDeclares = ['HDD', '하드', '하드디스크']
+    candidate = []
+
+    for Declare in ssdDeclares:
+        idx = text.find(Declare)
+
+        if idx == -1:
+            continue
+
+        # leave only one line that includes declare
+        line = text[text.rfind("\n", 0, idx) + 1:text.find("\n", idx)]
+        idx = line.find(Declare)
+
+        post = re.search(r'\d+', line[idx:])
+        if post != None:
+            candidate.append(int(post.group()))
+        pre = re.search(r'\d+', line[idx::-1])
+        if pre != None:
+            candidate.append(int(pre.group()[::-1]))
+
+    if len(candidate) == 0:
+        return -1
+
+    def ssdSort(val):
+        if val <= 0:
+            return -1
+        return -bin(val).count("1") * 10 - abs(math.log2(val) - 9.5)
 
     return sorted(candidate, key=ssdSort, reverse=True)[0]
 
@@ -313,4 +383,69 @@ def Washer(title, price, URL, time, text, site):
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
     coll = client.test.washer
+    coll.insert(data)
+
+def HeadPhone(title, price, URL, time, text, site):
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.headphone
+    coll.insert(data)
+
+def GameMachine(title, price, URL, time, text, site):
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.gamemachine
+    coll.insert(data)
+
+
+def DestkTop(title, price, URL, time, text, site):
+
+    f2f = _getf2f(text)
+    cpu = _getCpu(text)
+    gpu = _getGpu(text)
+    ram = _getRam(text)
+    ssd = _getSsd(text)
+    hdd = _getHdd(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "cpu": cpu,
+        "gpu": gpu,
+        "ram": ram,
+        "ssd": ssd,
+        "hdd": hdd,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.desktop
     coll.insert(data)
