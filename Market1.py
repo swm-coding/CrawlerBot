@@ -4,6 +4,7 @@ import requests
 import os
 import DataCheck
 
+
 start = 0
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -44,7 +45,7 @@ while 1:
         continue
 
     repoCheck = soup.find('p', id='no-article')
-    if repoCheck :
+    if repoCheck:
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
@@ -104,7 +105,6 @@ request.close()
 
 with open(os.path.join(BASE_DIR, "startMarket1.txt"), "w") as f:
     f.write(articles)
-
 
 with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
     f.write("End Market1.py " + str(datetime.now()) + " " + articles + "\n")
