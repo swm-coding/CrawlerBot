@@ -27,7 +27,11 @@ while 1:
     URL = URL + articles
     print(URL)
 
-    request = requests.get(URL)
+    try:
+        request = requests.get(URL)
+    except Exception:
+        articles = str(int(articles) + 2)
+        
     html = request.text
     soup = BeautifulSoup(html, 'html.parser')
 
