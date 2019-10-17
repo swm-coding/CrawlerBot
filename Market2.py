@@ -25,7 +25,7 @@ with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
 while 1:
     URL = 'https://www.daangn.com/articles/'
     URL = URL + articles
-    print(URL)
+    # print(URL)
 
     try:
         request = requests.get(URL)
@@ -91,7 +91,7 @@ while 1:
         articles = str(int(articles) + 2)
         continue
 
-    print(title, price, day, URL, description)
+    # print(title, price, day, URL, description)
     try:
         DataCheck.DataCheck(title, str(price), URL, day, description, 3)
     except Exception:

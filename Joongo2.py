@@ -22,7 +22,7 @@ with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
 while 1:
     URL = 'https://api.joongna.com/product/'
     URL = URL + articles
-    print(URL)
+    # print(URL)
     request = requests.get(URL)
 
     if request.status_code == 400:
@@ -44,7 +44,7 @@ while 1:
         articles = str(int(articles) + 2)
         continue
 
-    print(title, price, day, URL, description)
+    # print(title, price, day, URL, description)
 
     """
     데이터 분석 및 몽고디비 연결

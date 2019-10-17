@@ -23,7 +23,7 @@ while 1:
     URL = 'https://core-api.bunjang.co.kr/api/1/product/'
     URL2 = '/detail_info.json?stat_uid=9056251&version=2'
     URL = URL + articles + URL2
-    print(URL)
+    # print(URL)
     request = requests.get(URL)
     html = request.json()
 
@@ -36,7 +36,7 @@ while 1:
         continue
 
     if html['item_info'] == None:
-        print('None')
+        # print('None')
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
@@ -45,7 +45,7 @@ while 1:
         continue
 
     elif html['item_info']['status'] == "3":
-        print('Trade')
+        # print('Trade')
         count += 1
         articles = str(int(articles) + 2)
         if count >= 10:
@@ -62,7 +62,7 @@ while 1:
     if int(price) < 10000:
         articles = str(int(articles) + 2)
         continue
-    print(title, price, day, URL, description)
+    # print(title, price, day, URL, description)
 
     """
     데이터 분석 및 몽고디비 연결
