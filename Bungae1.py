@@ -2,12 +2,12 @@ import requests
 from datetime import datetime
 import os
 import DataCheck
+import crawlbotlogging
 
 
 start = 0
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-log_title = str(datetime.today().year) + '-' + str(datetime.today().month) + '-' + str(datetime.today().day) + '.txt'
 
 with open(os.path.join(BASE_DIR, "startBungae1.txt"), "r") as f:
     start = int(f.readline())
@@ -17,8 +17,8 @@ count = 0
 
 end = 0
 
-with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
-    f.write("Start Bungae1.py " + str(datetime.now()) + " " + articles + "\n")
+startTime = datetime.now()
+crawlbotlogging.startLog("Bungae1.py", articles)
 
 while 1:
     URL = 'https://core-api.bunjang.co.kr/api/1/product/'
@@ -79,5 +79,4 @@ request.close()
 with open(os.path.join(BASE_DIR, "startBungae1.txt"), "w") as f:
     f.write(articles)
 
-with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
-    f.write("End Bungae1.py " + str(datetime.now()) + " " + articles + "\n")
+crawlbotlogging.endLog("Bungae1.py", articles, startTime)

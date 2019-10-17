@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 import os
 import DataCheck
+import crawlbotlogging
 
 
 start = 0
@@ -17,8 +18,8 @@ count = 0
 
 end = 0
 
-with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
-    f.write("Start Joongo1.py " + str(datetime.now()) + " " + articles + "\n")
+startTime = datetime.now()
+crawlbotlogging.startLog("Joongo1.py", articles)
 
 while 1:
     URL = 'https://api.joongna.com/product/'
@@ -67,5 +68,4 @@ with open(os.path.join(BASE_DIR, "startJoongo1.txt"), "w") as f:
     f.write(articles)
 
 
-with open(os.path.join(BASE_DIR + "/logs", log_title), "a+") as f:
-    f.write("End Joongo1.py " + str(datetime.now()) + " " + articles + "\n")
+crawlbotlogging.endLog("Joongo1.py", articles, startTime)
