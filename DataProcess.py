@@ -4,25 +4,28 @@ from pymongo import MongoClient
 
 def _getCompany(text):
     companyList = [
-        ['삼성', 'SAMSUNG'],
-        ['LG', '엘지', '엘쥐'],
+        ['삼성', 'SAMSUNG', '갤럭시'],
+        ['LG', '엘지', '엘쥐', 'LG전'],
         ['ASUS', '에이수스'],
         ['APPLE', '맥', '애플', '아이맥', '에어팟', '아이패드', '아이팟'],
         ['한성'],
         ['HP'],
         ['LENOVO', '레노버', '레노보'],
-        ['롯데', '하이마트'],
+        ['롯데하이마트', '롯데', '하이마트'],
         ['소니', 'SONY'],
         ['제닉스'],
         ['QCY'],
         ['JBL'],
         ['ABKO', '앱코'],
         ['MSI'],
-        ['Britz'],
+        ['BRITZ'],
         ['웨이코스'],
         ['맥스틸'],
         ['MAXTILL'],
         ['RAZER'],
+        ['위니아딤채', '딤채'],
+        ['쿠쿠전자', '쿠쿠'],
+        ['쿠첸'],
     ]
 
     for companyNames in companyList:
@@ -45,8 +48,10 @@ def _getCpu(text):
 
     if "라이젠3" or "라이젠 3" in text:
         return "Ryzen 3"
+
     if "라이젠5" or "라이젠 5" in text:
         return "Ryzen 5"
+
     if "라이젠7" or "라이젠 7" in text:
         return "Ryzen 7"
 
@@ -262,12 +267,687 @@ def _getWasherSize(text):
     # TODO: 냉장고 용량 데이터 처리 '리터' 'L' 구분,
     return ''
 
-
 def _getf2f(text):
     if "직거래" in text:
         return 1
 
     return 0
+
+def SmartPhone(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.smartphone
+    coll.insert(data)
+
+def Tablet(title, price, URL, time, text, site):
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.tablet
+    coll.insert(data)
+
+def SmartWatch(title, price, URL, time, text, site):
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.smartwatch
+    coll.insert(data)
+
+
+def DigitalCamera(title, price, URL, time, text, site):
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.digitalcamera
+    coll.insert(data)
+
+def DSLR(title, price, URL, time, text, site):
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dslr
+    coll.insert(data)
+
+def ActionCamera(title, price, URL, time, text, site):
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.actioncamera
+    coll.insert(data)
+
+
+def KimchiRefrigerator(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    size = _getRefgrigeratorSize(text)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "size": size,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.kimchirefrigerator
+    coll.insert(data)
+
+def Refrigerator(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    size = _getRefgrigeratorSize(text)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "size": size,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.refrigerator
+    coll.insert(data)
+
+def ElectronicRice(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.electronicrice
+    coll.insert(data)
+
+def Induction(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.induction
+    coll.insert(data)
+
+def Electronic(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.electronic
+    coll.insert(data)
+
+def Oven(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.oven
+    coll.insert(data)
+
+def ElectronicPort(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.electronicport
+    coll.insert(data)
+
+def Mixer(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.mixer
+    coll.insert(data)
+
+def CofeeMachine(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.coffeemachine
+    coll.insert(data)
+
+def DishesWashing(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.disheswashing
+    coll.insert(data)
+
+def DishesDrying(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dishesdrying
+    coll.insert(data)
+
+def FoodTrash(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.foodtrash
+    coll.insert(data)
+
+
+def Washer(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    size = _getWasherSize(text)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "size": size,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.washer
+    coll.insert(data)
+
+def ElectronicCleaning(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.electroniccleaning
+    coll.insert(data)
+
+
+def TV(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    display = _getDisplay(text)
+    displayTech = _getDisplayTech(text)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "display": display,
+        "displayTech" : displayTech,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.tv
+    coll.insert(data)
+
+def AirCondition(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.aircondition
+    coll.insert(data)
+
+def Heater(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.heater
+    coll.insert(data)
+
+def AirWasher(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.airwasher
+    coll.insert(data)
+
+def Humidification(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.humidification
+    coll.insert(data)
+
+def Dehumidification(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dehumidification
+    coll.insert(data)
+
+def WaterPurifer(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.waterpurifer
+    coll.insert(data)
+
+
+def GameMachine(title, price, URL, time, text, site):
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.gamemachine
+    coll.insert(data)
+
+def DestkTop(title, price, URL, time, text, site):
+
+    f2f = _getf2f(text)
+    cpu = _getCpu(text)
+    gpu = _getGpu(text)
+    ram = _getRam(text)
+    ssd = _getSsd(text)
+    hdd = _getHdd(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "cpu": cpu,
+        "gpu": gpu,
+        "ram": ram,
+        "ssd": ssd,
+        "hdd": hdd,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site": site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.desktop
+    coll.insert(data)
+
+def Monitor(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dehumidification
+    coll.insert(data)
+
+def Keyboard(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dehumidification
+    coll.insert(data)
+
+def Mouse(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dehumidification
+    coll.insert(data)
+
+def efm(title, price, URL, time, text, site):
+
+    company = _getCompany(title)
+    f2f = _getf2f(text)
+
+    data = {
+        "title": title,
+        "price": price,
+        "company": company,
+        "time": time,
+        "url": URL,
+        "text": text,
+        "f2f": f2f,
+        "site" : site
+    }
+
+    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
+    coll = client.test.dehumidification
+    coll.insert(data)
+
 
 def Laptop(title, price, URL, time, text, site):
 
@@ -297,17 +977,15 @@ def Laptop(title, price, URL, time, text, site):
     coll = client.test.laptop
     coll.insert(data)
 
-def Refrigerator(title, price, URL, time, text, site):
+def PrinterScanner(title, price, URL, time, text, site):
 
     company = _getCompany(title)
-    size = _getRefgrigeratorSize(text)
     f2f = _getf2f(text)
 
     data = {
         "title": title,
         "price": price,
         "company": company,
-        "size": size,
         "time": time,
         "url": URL,
         "text": text,
@@ -316,10 +994,10 @@ def Refrigerator(title, price, URL, time, text, site):
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.refrigerator
+    coll = client.test.printscanner
     coll.insert(data)
 
-def SmartPhone(title, price, URL, time, text, site):
+def Printer(title, price, URL, time, text, site):
 
     company = _getCompany(title)
     f2f = _getf2f(text)
@@ -332,57 +1010,52 @@ def SmartPhone(title, price, URL, time, text, site):
         "url": URL,
         "text": text,
         "f2f": f2f,
-        "site": site
+        "site" : site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.smartphone
+    coll = client.test.printer
     coll.insert(data)
 
-def TV(title, price, URL, time, text, site):
+def Scanner(title, price, URL, time, text, site):
 
     company = _getCompany(title)
-    display = _getDisplay(text)
-    displayTech = _getDisplayTech(text)
     f2f = _getf2f(text)
 
     data = {
         "title": title,
         "price": price,
         "company": company,
-        "display": display,
-        "displayTech" : displayTech,
         "time": time,
         "url": URL,
         "text": text,
         "f2f": f2f,
-        "site": site
+        "site" : site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.tv
+    coll = client.test.scanner
     coll.insert(data)
 
-def Washer(title, price, URL, time, text, site):
+
+def Speaker(title, price, URL, time, text, site):
 
     company = _getCompany(title)
-    size = _getWasherSize(text)
     f2f = _getf2f(text)
 
     data = {
         "title": title,
         "price": price,
         "company": company,
-        "size": size,
         "time": time,
         "url": URL,
         "text": text,
         "f2f": f2f,
-        "site": site
+        "site" : site
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.washer
+    coll = client.test.speaker
     coll.insert(data)
 
 def HeadPhone(title, price, URL, time, text, site):
@@ -404,48 +1077,4 @@ def HeadPhone(title, price, URL, time, text, site):
     coll = client.test.headphone
     coll.insert(data)
 
-def GameMachine(title, price, URL, time, text, site):
-    f2f = _getf2f(text)
 
-    data = {
-        "title": title,
-        "price": price,
-        "time": time,
-        "url": URL,
-        "text": text,
-        "f2f": f2f,
-        "site": site
-    }
-
-    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.gamemachine
-    coll.insert(data)
-
-
-def DestkTop(title, price, URL, time, text, site):
-
-    f2f = _getf2f(text)
-    cpu = _getCpu(text)
-    gpu = _getGpu(text)
-    ram = _getRam(text)
-    ssd = _getSsd(text)
-    hdd = _getHdd(text)
-
-    data = {
-        "title": title,
-        "price": price,
-        "cpu": cpu,
-        "gpu": gpu,
-        "ram": ram,
-        "ssd": ssd,
-        "hdd": hdd,
-        "time": time,
-        "url": URL,
-        "text": text,
-        "f2f": f2f,
-        "site": site
-    }
-
-    client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.desktop
-    coll.insert(data)
