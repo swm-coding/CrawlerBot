@@ -4,11 +4,19 @@ from pymongo import MongoClient
 
 def _getCompany(text):
     companyList = [
-        ['삼성', 'SAMSUNG', '갤럭시'],
-        ['LG', '엘지', '엘쥐', 'LG전'],
+        ['삼성', 'SAMSUNG', '갤럭시', '삼성전자'],
+        ['LG', '엘지', '엘쥐', 'LG전자'],
         ['ASUS', '에이수스'],
-        ['APPLE', '맥', '애플', '아이맥', '에어팟', '아이패드', '아이팟'],
-        ['한성'],
+        ['APPLE', '맥북', '애플', '아이맥', '에어팟', '아이패드', '아이팟'],
+        ['CANON', '캐논'],
+        ['신도리코'],
+        ['EPSON'],
+        ['샤오미'],
+        ['한성컴퓨터', '한성'],
+        ['BENQ', '벤큐'],
+        ['CORSAIR', '커세어'],
+        ['DECK', '덱'],
+        ['알파스캔'],
         ['HP'],
         ['LENOVO', '레노버', '레노보'],
         ['롯데하이마트', '롯데', '하이마트'],
@@ -21,11 +29,13 @@ def _getCompany(text):
         ['BRITZ'],
         ['웨이코스'],
         ['맥스틸'],
+        ['로지텍', 'LOGITECH'],
         ['MAXTILL'],
         ['RAZER'],
         ['위니아딤채', '딤채'],
         ['쿠쿠전자', '쿠쿠'],
         ['쿠첸'],
+        ['알파스캔'],
     ]
 
     for companyNames in companyList:
@@ -885,7 +895,7 @@ def Monitor(title, price, URL, time, text, site):
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.dehumidification
+    coll = client.test.monitor
     coll.insert(data)
 
 def Keyboard(title, price, URL, time, text, site):
@@ -905,7 +915,7 @@ def Keyboard(title, price, URL, time, text, site):
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.dehumidification
+    coll = client.test.keyboard
     coll.insert(data)
 
 def Mouse(title, price, URL, time, text, site):
@@ -925,7 +935,7 @@ def Mouse(title, price, URL, time, text, site):
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.dehumidification
+    coll = client.test.mouse
     coll.insert(data)
 
 def efm(title, price, URL, time, text, site):
@@ -945,7 +955,7 @@ def efm(title, price, URL, time, text, site):
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.dehumidification
+    coll = client.test.efm
     coll.insert(data)
 
 
@@ -994,7 +1004,7 @@ def PrinterScanner(title, price, URL, time, text, site):
     }
 
     client = MongoClient("mongodb://dev:dev@13.125.4.46:27017/test")
-    coll = client.test.printscanner
+    coll = client.test.printerscanner
     coll.insert(data)
 
 def Printer(title, price, URL, time, text, site):

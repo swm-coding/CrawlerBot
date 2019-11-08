@@ -16,7 +16,7 @@ def DataCheck(title, price, URL, time, text, site):
     InductionDeclares = ["인덕션", "전기레인지"]
     ElectronicDeclares = ["전자레인지"]
     OvenDeclares = ["오븐"]
-    ElctronicPortDeclares = ["전기포트", "전기주전"]
+    ElctronicPortDeclares = ["전기포트", "전기주전자", "전기 포트", "전기 주전자"]
     MixerDeclares = ["믹서기"]
     CoffeeMachineDeclares = ["커피머신"]
     DishesWashingDeclares = ["식기세척기"]
